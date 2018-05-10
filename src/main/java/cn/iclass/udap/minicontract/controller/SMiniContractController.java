@@ -95,7 +95,7 @@ public class SMiniContractController {
 	
 	
 	@ApiOperation(value = "删除合同", notes = "删除合同方法"
-			, httpMethod = "DELETE")
+			, httpMethod = "POST")
 	@PostMapping("/sMiniContractsDel/{id}")
 	public boolean deleteContract(@PathVariable long id){
 		this.sMiniContractRepository.delete(id);
