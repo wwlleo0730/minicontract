@@ -75,12 +75,6 @@ public class SMiniContract extends IdEntity{
     private String videoUrl;
 
     private String audioUrl;
-    
-    //区块链合同id
-    private Long contractno;
-    
-    //区块链保存信息
-    private String contractdealinfo;
 
     private long dbidex;
 
