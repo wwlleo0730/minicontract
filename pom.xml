@@ -170,14 +170,14 @@
 				<groupId>org.web3j</groupId>
 				<artifactId>web3j-maven-plugin</artifactId>
 				<version>0.3.0</version>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate-sources</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 				<configuration>
 					<packageName>
 						cn.iclass.udap.minicontract.smartContract
