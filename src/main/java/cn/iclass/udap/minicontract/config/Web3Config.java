@@ -15,10 +15,10 @@ import java.math.BigInteger;
 @Component
 public class Web3Config {
 
-    @Value("${mini-contract.ethereum-address}")
+    @Value("${miniContract.ethereumAddress}")
     public String contractAddress;
 
-    @Value("${mini-contract.ethereum-privatekey}")
+    @Value("${miniContract.ethereumPrivatekey}")
     public String serverPrivateKey;
 
     @Bean
