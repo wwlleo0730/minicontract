@@ -6,7 +6,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
+import cn.iclass.udap.minicontract.repository.SAccountDao;
 import cn.iclass.udap.minicontract.repository.SMiniContractDao;
 
 @Service
@@ -16,7 +18,17 @@ public class SMiniContractService {
 	@Resource
 	private SMiniContractDao sMiniContractRepository;
 	
-	public void doEthereum(){
+	@Resource
+	private EthService ethService;
+	
+	@Resource
+	private SAccountDao sAccountDao;
+	
+	public void doEthereumMini(SMiniContract contract){
+		
+		 
+		
+		//ethService.mint(A, B, Aphone, Bphone, tilte, content, sound, picture)
 		
 	}
 	
@@ -50,8 +62,7 @@ public class SMiniContractService {
 			
 			if(checkDoEthereum(smini)){
 				
-				this.doEthereum();
-				
+				//this.doEthereum();
 				return ;
 				
 			}
@@ -63,7 +74,7 @@ public class SMiniContractService {
 			
 			if(checkDoEthereum(smini)){
 				
-				this.doEthereum();
+				//this.doEthereum();
 				
 				return ;
 			}
@@ -76,6 +87,29 @@ public class SMiniContractService {
 		
 	}
 
+	/**
+	 * 创建合同
+	 * @param wxid
+	 * @param content
+	 * @param picurl
+	 * @return
+	 */
+	public SMiniContract createContract(String wxid,String title,String content,String picurl){
+		
+		SMiniContract contract = new SMiniContract();
+		
+		contract.setTitle(title);
+		contract.setContent(content);
+		contract.setPhotoUrl(picurl);
+		
+		SAccount creator = this.sAccountDao.findByWxid(wxid);
+		
+		contract.setCreator(creator);
+		
+		this.sMiniContractRepository.save(contract);
+		
+		return contract;
+	}
 	
 	/**
 	 * 

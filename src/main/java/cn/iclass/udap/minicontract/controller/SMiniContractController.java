@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
+import cn.iclass.udap.minicontract.domain.SMiniContractVO;
+import cn.iclass.udap.minicontract.repository.SAccountDao;
 import cn.iclass.udap.minicontract.repository.SMiniContractDao;
 import cn.iclass.udap.minicontract.service.SMiniContractService;
 
@@ -49,13 +52,19 @@ public class SMiniContractController {
         return this.sMiniContractRepository.findByReceiverWxid(wxid);
     }
 	
+	@PostMapping("/sMiniContracts")
+	public SMiniContract createContract(@RequestBody SMiniContractVO contractVO){
+		
+		return this.sminiContractService.createContract(contractVO.getWxid() , contractVO.getTitle(),
+				contractVO.getContent() , contractVO.getPicUrl());
+	}
+	
 	@PostMapping("/sMiniContracts/{id}")
 	public boolean updateContract(@PathVariable long id , 
 			@RequestBody SMiniContract contract){
 		
 		//更新合同
-		sminiContractService.updateContract(id,contract);
-		
+		sminiContractService.updateContract(id,contract);	
 		return true;
 	}
 	
