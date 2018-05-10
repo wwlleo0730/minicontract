@@ -30,5 +30,6 @@ web3j:
   client-address: http://localhost:8545
   httpTimeoutSeconds: 600
 
-mini-contract:
-  ethereum-address:notSet
+miniContract:
+  ethereumAddress:7d6fe5e2ad3f4b980f56727a9651f1b0efcfd856
+  ethereumPrivatekey: 79972a6328ab7fd6bc90cae4b72fa41e9ad6ee376f39c0ebd5c4926157f1e97f
