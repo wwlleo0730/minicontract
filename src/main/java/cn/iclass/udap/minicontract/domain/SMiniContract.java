@@ -56,4 +56,8 @@ public class SMiniContract extends IdEntity{
 
     private String audioUrl;
 
+    private long dbidex;
+
+    private String ethReceipt;
+
 }
