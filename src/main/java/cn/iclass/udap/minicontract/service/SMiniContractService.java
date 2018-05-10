@@ -71,9 +71,18 @@ public class SMiniContractService {
 	public SMiniContract signContract(long contractId, String wxid) {
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(contractId);
-
-		String creator_wxid = smini.getCreator().getWxid();
-		String receiver_wxid = smini.getReceiver().getWxid();
+		
+		String creator_wxid = "";
+		String receiver_wxid = "";
+		
+		if(null != smini.getCreator()){
+			creator_wxid = smini.getCreator().getWxid();
+		}
+		
+		if(null != smini.getReceiver()){
+			receiver_wxid = smini.getReceiver().getWxid();
+		}
+	
 		
 		// 判断当前签字的身份
 		if (creator_wxid.equals(wxid)) {
@@ -93,6 +102,8 @@ public class SMiniContractService {
 		}
 		
 		if (checkDoEthereum(smini)) {
+			
+			logger.info("start writing data to Ethereum，the contrract id -->"+smini.getId());
 			this.doEthereumMini(smini);
 		}
 		
