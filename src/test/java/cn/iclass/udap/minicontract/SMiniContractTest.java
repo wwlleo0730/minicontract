@@ -28,6 +28,25 @@ public class SMiniContractTest {
 	@Test
 	public void createMinicontract(){
 		
+		
+//		SAccount a = new SAccount();
+//		a.setAvatar("123");
+//		a.setLoginName("a");
+//		a.setMobile("11111111111");
+//		a.setNickname("aaa");
+//		a.setWxid("openid_aaa");
+//		
+//		this.accountDao.save(a);
+//		
+//		SAccount b = new SAccount();
+//		b.setAvatar("123");
+//		b.setLoginName("b");
+//		b.setMobile("22222222222");
+//		b.setNickname("bbb");
+//		b.setWxid("openid_bbb");
+//		
+//		this.accountDao.save(b);
+		
 		SAccount creator = this.accountDao.getOne(1L);
 		
 		SMiniContract contract = new SMiniContract();
