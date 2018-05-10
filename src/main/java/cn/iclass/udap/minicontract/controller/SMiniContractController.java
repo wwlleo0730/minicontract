@@ -76,7 +76,7 @@ public class SMiniContractController {
 		return this.sminiContractService.bindContractAndAccount(id, wxid);
 	}
 	
-	@ApiOperation(value = "修改合同", notes = "修改合同内容方法，暂时只允许修改标题，内容和图片地址"
+	@ApiOperation(value = "修改合同，并重置双方签名信息", notes = "修改合同内容方法，暂时只允许修改标题，内容和图片地址"
 			, httpMethod = "POST")
 	@PostMapping("/sMiniContracts/{id}")
 	public SMiniContract updateContract(@PathVariable long id , 
