@@ -10,6 +10,11 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @MappedSuperclass
 public class IdEntity implements Serializable {
 

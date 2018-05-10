@@ -35,13 +35,33 @@ public class SMiniContract extends IdEntity{
 	private SAccount creator;
 	
 	/**
+	 * 起草人是否签字
+	 */
+	private boolean iscreatorsign = false;
+	
+	/**
+	 * 起草人签字时间
+	 */
+	private Long creatorsigntime;
+	
+	/**
 	 * 签约人
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	private SAccount receiver;
 	
 	/**
-	 * 当前合同状态
+	 * 接收人是否签字
+	 */
+	private boolean isreceiversign = false;
+
+	/**
+	 * 接收人签字时间
+	 */
+	private Long receiversigntime;
+	
+	/**
+	 * 当前合同状态、已签和未签
 	 */
 	private String status;
 	
