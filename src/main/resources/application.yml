@@ -25,3 +25,10 @@ spring:
   jackson: 
     serialization: 
       fail-on-empty-beans: false
+
+web3j:
+  client-address: http://localhost:8545
+  httpTimeoutSeconds: 600
+
+mini-contract:
+  ethereum-address:notSet

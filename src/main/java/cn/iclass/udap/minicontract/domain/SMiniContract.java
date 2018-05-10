@@ -82,4 +82,8 @@ public class SMiniContract extends IdEntity{
     //区块链保存信息
     private String contractdealinfo;
 
+    private long dbidex;
+
+    private String ethReceipt;
+
 }

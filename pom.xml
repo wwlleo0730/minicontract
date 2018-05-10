@@ -14,6 +14,12 @@
 		<version>1.5.12.RELEASE</version>
 	</parent>
 
+	<properties>
+		<maven.test.skip>true</maven.test.skip>
+		<web3j.spring.version>1.6.0</web3j.spring.version>
+		<web3j.version>3.4.0</web3j.version>
+	</properties>
+
 	<dependencies>
 		<!-- web -->
 		<dependency>
@@ -55,6 +61,61 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.16.20</version>
+		</dependency>
+
+		<!--web3j-->
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>web3j-spring-boot-starter</artifactId>
+			<version>${web3j.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>core</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>crypto</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>utils</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>rlp</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>codegen</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>tuples</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>abi</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>geth</artifactId>
+			<version>${web3j.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
@@ -102,6 +163,37 @@
 				</executions>
 				<configuration>
 					<mainClass>${start-class}</mainClass>
+				</configuration>
+			</plugin>
+			<!--web3j-->
+			<plugin>
+				<groupId>org.web3j</groupId>
+				<artifactId>web3j-maven-plugin</artifactId>
+				<version>0.3.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate-sources</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<packageName>
+						cn.iclass.udap.minicontract.smartContract
+					</packageName>
+					<sourceDestination>
+						src/main/java
+					</sourceDestination>
+					<nativeJavaType>
+						true
+					</nativeJavaType>
+					<soliditySourceFiles>
+						<directory>src/main/resources/solidity</directory>
+						<includes>
+							<include>**/*.sol</include>
+						</includes>
+					</soliditySourceFiles>
 				</configuration>
 			</plugin>
 		</plugins>
