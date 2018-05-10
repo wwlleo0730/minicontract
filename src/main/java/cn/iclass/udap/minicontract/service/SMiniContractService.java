@@ -38,8 +38,8 @@ public class SMiniContractService {
 			
 			txHash = ethService.mint(contract.getCreator().getWxid(),
 					contract.getReceiver().getWxid(),
-					contract.getCreator().getMobile(), 
-					contract.getReceiver().getMobile(), 
+					"creatormobileno", 
+					"receivermobileno", 
 					contract.getTitle(),contract.getContent(), 
 					"", contract.getPhotoUrl());
 		
