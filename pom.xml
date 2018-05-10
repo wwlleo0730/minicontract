@@ -117,6 +117,18 @@
 			<version>${web3j.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- 微信相关 -->
+		<dependency>
+			<groupId>com.foxinmy</groupId>
+			<artifactId>weixin4j-base</artifactId>
+			<version>1.7.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.foxinmy</groupId>
+			<artifactId>weixin4j-mp</artifactId>
+			<version>1.7.9</version>
+		</dependency>
 
 	</dependencies>
 
@@ -170,14 +182,14 @@
 				<groupId>org.web3j</groupId>
 				<artifactId>web3j-maven-plugin</artifactId>
 				<version>0.3.0</version>
-				<!-- <executions>
+				<executions>
 					<execution>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate-sources</goal>
 						</goals>
 					</execution>
-				</executions> -->
+				</executions>
 				<configuration>
 					<packageName>
 						cn.iclass.udap.minicontract.smartContract
