@@ -133,10 +133,11 @@ public class SMiniContractService {
 	 *            暂时控制只允许修改内容和图片地址
 	 * 
 	 */
-	public void updateContract(long id, SMiniContract contract) {
+	public SMiniContract updateContract(long id, SMiniContract contract) {
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(id);
 
+		smini.setTitle(contract.getTitle());
 		smini.setContent(contract.getContent());
 		smini.setPhotoUrl(contract.getPhotoUrl());
 
@@ -148,6 +149,27 @@ public class SMiniContractService {
 		smini.setLastModifyTime(System.currentTimeMillis());
 
 		this.sMiniContractRepository.save(smini);
+		
+		return smini;
+	}
+	
+	/**
+	 * 账号合同绑定
+	 * @param id 合同ID
+	 * @param wxid openid
+	 * @return
+	 */
+	public SMiniContract bindContractAndAccount(long id , String wxid){
+		
+		SMiniContract smini = this.sMiniContractRepository.findOne(id);
+		
+		SAccount receiver = this.sAccountDao.findByWxid(wxid);
+		
+		smini.setReceiver(receiver);
+		
+		this.sMiniContractRepository.save(smini);
+		
+		return smini;
 	}
 
 }
