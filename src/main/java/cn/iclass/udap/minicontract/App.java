@@ -7,11 +7,20 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.foxinmy.weixin4j.mp.WeixinProxy;
+
 @SpringBootApplication
 public class App {
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
+	}
+	
+	@Bean
+	public WeixinProxy getWxproxy(){
+		
+		WeixinProxy wp = new WeixinProxy();
+		return wp;
 	}
 
 	@Bean
