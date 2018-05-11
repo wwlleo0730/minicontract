@@ -25,6 +25,7 @@ import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
 
 @Controller
+@RequestMapping("/oauth")
 public class OauthController {
 	
 	private Logger logger = LoggerFactory.getLogger(OauthController.class);
