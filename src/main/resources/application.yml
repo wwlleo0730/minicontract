@@ -27,7 +27,7 @@ spring:
       fail-on-empty-beans: false
 
 web3j:
-  client-address: http://localhost:8545
+  client-address: https://rinkeby.infura.io/aTFmVjYLRjSaUoS2xGeD
   httpTimeoutSeconds: 600
 
 miniContract:
