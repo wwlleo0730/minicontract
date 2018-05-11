@@ -18,9 +18,6 @@ public class OauthController {
 	
 	private Logger logger = LoggerFactory.getLogger(OauthController.class);
 	
-	@Resource
-	private WeixinProxy proxy;
-	
 	/**
 	 * 确认是否有cookies存在，如果存在则直接返回用户对象
 	 * 
