@@ -147,6 +147,18 @@ public class SMiniContractService {
 	public SMiniContract updateContract(long id, SMiniContract contract) {
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(id);
+		
+		if(null != contract.getCreator()){
+			
+			smini.setCreator(contract.getCreator());
+			
+		}
+		
+		if(null != contract.getReceiver()){
+			
+			smini.setReceiver(contract.getReceiver());
+			
+		}
 
 		smini.setTitle(contract.getTitle());
 		smini.setContent(contract.getContent());
