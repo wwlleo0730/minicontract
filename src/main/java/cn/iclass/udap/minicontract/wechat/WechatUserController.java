@@ -2,6 +2,8 @@ package cn.iclass.udap.minicontract.wechat;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,22 +20,27 @@ import cn.iclass.udap.minicontract.repository.SAccountDao;
 @RestController
 public class WechatUserController {
 	
-	@Resource
-	private SAccountDao accountDao;
+	private static final Logger logger = LoggerFactory.getLogger(WechatUserController.class);
 	
 	@Resource
-	private WeixinProxy weixinProxy;
+	private SAccountDao accountDao;
 	
 	@GetMapping("/wechat/user/{code}")
 	public User getUserByCode(@PathVariable String code){
 
 		OauthApi oauthApi =  new OauthApi();
+		
+		WeixinProxy weixinProxy = new WeixinProxy();
 			
 		try {
 			OauthToken token = 
 					oauthApi.getAuthorizationToken(code);
 			
+			logger.info("token:-->" + token);
+			
 			String openId = token.getOpenId();
+			
+			logger.info("openId:-->" + openId);
 			
 			User user = weixinProxy.getUser(openId);
 			
