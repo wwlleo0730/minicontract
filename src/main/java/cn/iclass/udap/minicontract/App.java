@@ -15,12 +15,6 @@ public class App {
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
-	
-	@Bean
-	public WeixinProxy getWxproxy(){		
-		WeixinProxy wp = new WeixinProxy();
-		return wp;
-	}
 
 	@Bean
 	public CorsFilter corsFilter() {
