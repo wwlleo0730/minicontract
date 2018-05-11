@@ -30,10 +30,16 @@ public class OauthController {
 	
 	private Logger logger = LoggerFactory.getLogger(OauthController.class);
 	
-	private static final String OAUTH_SERVER = "https://miniapi.iclass.cn/";
+	private static final String OAUTH_SERVER = "https://sooc.iclass.cn/oauth/";
 	
 	@Resource
 	private SAccountDao accountDao;
+	
+	@ResponseBody
+	@RequestMapping(value = { "/test" })
+	public String oauthTest() {
+		return "ok";
+	}
 	
 	@RequestMapping(value = { "/oauth2token" })
 	public String oauthRest(HttpServletRequest request, HttpServletResponse response,
