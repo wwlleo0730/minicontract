@@ -17,13 +17,6 @@ public class App {
 	}
 	
 	@Bean
-	public WeixinProxy getWxproxy(){
-		
-		WeixinProxy wp = new WeixinProxy();
-		return wp;
-	}
-
-	@Bean
 	public CorsFilter corsFilter() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		final CorsConfiguration config = new CorsConfiguration();
