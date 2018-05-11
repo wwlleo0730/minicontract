@@ -25,6 +25,13 @@ public class WechatUserController {
 	@Resource
 	private SAccountDao accountDao;
 	
+	
+	/**
+	 * 方法废弃，全部移到认证接口中
+	 * @param code
+	 * @return
+	 */
+	@Deprecated
 	@GetMapping("/wechat/user/{code}")
 	public User getUserByCode(@PathVariable String code){
 
