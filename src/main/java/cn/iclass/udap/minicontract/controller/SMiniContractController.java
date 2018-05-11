@@ -34,10 +34,10 @@ public class SMiniContractController {
 	private SMiniContractService sminiContractService;
 
 	
-	@ApiOperation(value = "所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
-	@GetMapping("/sMiniContracts")
-	public List<SMiniContract> get() {
-		return this.sMiniContractRepository.findAll();
+	@ApiOperation(value = "我的所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
+	@GetMapping("/mysMiniContracts/{wxid}")
+	public List<SMiniContract> get(@PathVariable("wxid") String wxid) {
+		return this.sMiniContractRepository.findByCreatorWxidOrReceiverWxid(wxid);
 	}
 
 	@ApiOperation(value = "根据ID获得合同信息", notes = "根据ID获得合同信息", httpMethod = "GET")
