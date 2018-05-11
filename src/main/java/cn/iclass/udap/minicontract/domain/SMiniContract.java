@@ -34,6 +34,9 @@ public class SMiniContract extends IdEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	private SAccount creator;
 	
+	//创建者手机
+	private String creatormobile;
+	
 	/**
 	 * 起草人是否签字
 	 */
@@ -49,6 +52,9 @@ public class SMiniContract extends IdEntity{
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	private SAccount receiver;
+	
+	//接收者手机
+	private String receivermobile;
 	
 	/**
 	 * 接收人是否签字

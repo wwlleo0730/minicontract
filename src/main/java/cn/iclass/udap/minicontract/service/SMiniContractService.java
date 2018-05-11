@@ -33,13 +33,20 @@ public class SMiniContractService {
 	public void doEthereumMini(SMiniContract contract) {
 		
 		String txHash = "";
+		
+		String cMobile = "";
+		String rMobile = "";
+		
+		if(null != contract.getCreatormobile()) cMobile = contract.getCreatormobile();
+		
+		if(null != contract.getReceivermobile()) rMobile = contract.getReceivermobile();
 
 		try {
 			
 			txHash = ethService.mint(contract.getCreator().getWxid(),
 					contract.getReceiver().getWxid(),
-					"creatormobileno", 
-					"receivermobileno", 
+					cMobile, 
+					rMobile,
 					contract.getTitle(),contract.getContent(), 
 					"", contract.getPhotoUrl());
 		
@@ -148,22 +155,25 @@ public class SMiniContractService {
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(id);
 		
-		if(null != contract.getCreator()){
-			
-			smini.setCreator(contract.getCreator());
-			
-		}
-		
-		if(null != contract.getReceiver()){
-			
-			smini.setReceiver(contract.getReceiver());
-			
-		}
+//		if(null != contract.getCreator()){
+//			
+//			smini.setCreator(contract.getCreator());
+//			
+//		}
+//		
+//		if(null != contract.getReceiver()){
+//			
+//			smini.setReceiver(contract.getReceiver());
+//			
+//		}
 
 		smini.setTitle(contract.getTitle());
 		smini.setContent(contract.getContent());
 		smini.setPhotoUrl(contract.getPhotoUrl());
-
+		
+		smini.setCreatormobile(contract.getCreatormobile());
+		smini.setReceivermobile(contract.getReceivermobile());
+		
 		smini.setCreatorsigntime(null);
 		smini.setReceiversigntime(null);
 		smini.setIscreatorsign(false);
