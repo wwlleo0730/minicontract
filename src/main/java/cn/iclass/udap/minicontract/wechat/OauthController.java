@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,12 +40,12 @@ public class OauthController {
 	
 	@ApiIgnore
 	@ResponseBody
-	@RequestMapping(value = { "/test" })
+	@GetMapping(value = { "/test" })
 	public String oauthTest() {
 		return "ok";
 	}
 	
-	@RequestMapping(value = { "/oauth2token" })
+	@GetMapping(value = { "/oauth2token" })
 	public String oauthRest(HttpServletRequest request, HttpServletResponse response,
 			RedirectAttributes redirectAttributes) {
 
@@ -71,14 +72,14 @@ public class OauthController {
 
 	}
 	
-	@RequestMapping(value = "/usertoken")
+	@GetMapping(value = "/usertoken")
 	@ResponseBody
 	public User usertoken(HttpServletRequest request, HttpServletResponse response) {
 		User user = checkCookie(request);
 		return user;
 	}
 
-	@RequestMapping(value = "/authtoken")
+	@GetMapping(value = "/authtoken")
 	@ResponseBody
 	public User oauthToken(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "code") String code, @RequestParam(value = "state") String system,
@@ -93,7 +94,7 @@ public class OauthController {
 		return user;
 	}
 	
-	@RequestMapping(value = { "/token/dec/{tokenValue}" } )
+	@GetMapping(value = { "/token/dec/{tokenValue}" } )
 	public User decOauthToken(@PathVariable("tokenValue") String tokenValue){
 		
 		User user = null;

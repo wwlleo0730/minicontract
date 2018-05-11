@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,7 +34,7 @@ public class OauthJsController {
 	private static final String URL_PARA = "url";
 	
 	@ResponseBody
-	@RequestMapping(value = { "/oauth2js" })
+	@GetMapping(value = { "/oauth2js" })
 	public Object indexJump(HttpServletRequest request) {
 				
 		String surl = request.getParameter(URL_PARA);
@@ -69,7 +70,6 @@ public class OauthJsController {
 		return ret;
 	}
 	
-	@ApiIgnore
 	public static Map<String, String> sign(String jsapi_ticket, String url) {
 		Map<String, String> ret = new HashMap<String, String>();
 		String nonce_str = create_nonce_str();
@@ -104,7 +104,6 @@ public class OauthJsController {
 	}
 
 	
-	@ApiIgnore
 	private static String byteToHex(final byte[] hash) {
 		Formatter formatter = new Formatter();
 		for (byte b : hash) {
@@ -115,12 +114,10 @@ public class OauthJsController {
 		return result;
 	}
 
-	@ApiIgnore
 	private static String create_nonce_str() {
 		return UUID.randomUUID().toString();
 	}
 
-	@ApiIgnore
 	private static String create_timestamp() {
 		return Long.toString(System.currentTimeMillis() / 1000);
 	}
