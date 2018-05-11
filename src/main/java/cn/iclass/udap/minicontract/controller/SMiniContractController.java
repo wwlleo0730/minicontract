@@ -34,21 +34,28 @@ public class SMiniContractController {
 	@Resource
 	private SMiniContractService sminiContractService;
 
+//	@ApiOperation(value = "所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
+//	@GetMapping("/sMiniContracts/{wxid}")
+//	public List<SMiniContract> get(@PathVariable("wxid") String wxid) {
+//		return sMiniContractRepository.findAll();
+//	}
 	
 	@ApiOperation(value = "我的所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
 	@GetMapping("/mysMiniContracts/{wxid}")
 	public List<SMiniContract> get(@PathVariable("wxid") String wxid) {
 		
-		List<SMiniContract> list1 =  this.sMiniContractRepository.findByCreatorWxid(wxid);
+		return sMiniContractRepository.findAll();
 		
-		List<SMiniContract> list2 =  this.sMiniContractRepository.findByReceiverWxid(wxid);
-		
-		List<SMiniContract> arrayList =  new ArrayList<SMiniContract>();
-		
-		arrayList.addAll(list1);
-		arrayList.addAll(list2);
-		
-		return arrayList;
+//		List<SMiniContract> list1 =  this.sMiniContractRepository.findByCreatorWxid(wxid);
+//		
+//		List<SMiniContract> list2 =  this.sMiniContractRepository.findByReceiverWxid(wxid);
+//		
+//		List<SMiniContract> arrayList =  new ArrayList<SMiniContract>();
+//		
+//		arrayList.addAll(list1);
+//		arrayList.addAll(list2);
+//		
+//		return arrayList;
 	}
 
 	@ApiOperation(value = "根据ID获得合同信息", notes = "根据ID获得合同信息", httpMethod = "GET")
