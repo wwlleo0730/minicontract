@@ -38,7 +38,7 @@ public class SMiniContract extends IdEntity{
 	private String creatormobile;
 	
 	//创建者姓名
-	private String creatorName;
+	private String creatorname;
 	
 	/**
 	 * 起草人是否签字
@@ -60,7 +60,7 @@ public class SMiniContract extends IdEntity{
 	private String receivermobile;
 	
 	//接收者姓名
-	private String receiverName;
+	private String receivername;
 	
 	/**
 	 * 接收人是否签字
