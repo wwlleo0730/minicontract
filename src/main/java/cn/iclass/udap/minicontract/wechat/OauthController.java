@@ -30,7 +30,7 @@ public class OauthController {
 	
 	private Logger logger = LoggerFactory.getLogger(OauthController.class);
 	
-	private static final String OAUTH_SERVER = "https://sooc.iclass.cn/oauth/";
+	private static final String OAUTH_SERVER = "https://sooc.iclass.cn/miniapi/oauth/";
 	
 	@Resource
 	private SAccountDao accountDao;
