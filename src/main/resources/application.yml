@@ -1,9 +1,9 @@
 server: 
-  ssl: 
-    key-store: classpath:keystore.p12
-    key-store-password: 111111
-    keyStoreType: PKCS12
-    keyAlias: tomcat
+#  ssl: 
+#    key-store: classpath:keystore.p12
+#    key-store-password: 111111
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
   port: 7000
   tomcat:
     max-threads: 500 # Maximum amount of worker threads.
