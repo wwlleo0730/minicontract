@@ -1,6 +1,7 @@
 package cn.iclass.udap.minicontract;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import cn.iclass.udap.minicontract.domain.SMiniContract;
 import cn.iclass.udap.minicontract.repository.Constant;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
 import cn.iclass.udap.minicontract.repository.SMiniContractDao;
+import cn.iclass.udap.minicontract.service.SMiniContractService;
 
 
 @RunWith(SpringRunner.class)
@@ -24,6 +26,9 @@ public class SMiniContractTest {
 	
 	@Resource
 	private SMiniContractDao scontractDao;
+	
+	@Resource
+	private SMiniContractService miniService;
 	
 	@Test
 	public void createMinicontract(){
@@ -59,6 +64,24 @@ public class SMiniContractTest {
 		contract.setPhotoUrl("http://localhost/ppp.jpg");
 		
 		this.scontractDao.save(contract);
+		
+	}
+	
+	@Test
+	@Transactional
+	public void testSign(){
+		
+		SMiniContract contract = this.scontractDao.findOne(2L);
+		
+		this.miniService.signContract(contract.getId(), contract.getCreator().getWxid());
+		
+		SAccount receiver = this.accountDao.findOne(2L);
+		
+		this.miniService.bindContractAndAccount(contract.getId(), receiver.getWxid());
+		
+		this.miniService.signContract(contract.getId() , receiver.getWxid());
+		
+		
 		
 	}
 

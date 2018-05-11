@@ -44,7 +44,7 @@ public class EthService {
     @Autowired
     public Credentials credentials;
 
-    @Value("${mini-contract.ethereum-address}")
+    @Value("${miniContract.ethereumAddress}")
     public String contractAddress;
 
     public String mintSync(String A, String B, String Aphone, String Bphone, String tilte, String content, String sound, String picture) throws ExecutionException, InterruptedException {
