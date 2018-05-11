@@ -21,9 +21,6 @@ import cn.iclass.udap.minicontract.repository.SAccountDao;
 public class WechatUserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WechatUserController.class);
-		
-	@Resource
-	private WeixinProxy weixinProxy;
 	
 	@Resource
 	private SAccountDao accountDao;
@@ -32,6 +29,8 @@ public class WechatUserController {
 	public User getUserByCode(@PathVariable String code){
 
 		OauthApi oauthApi =  new OauthApi();
+		
+		WeixinProxy weixinProxy = new WeixinProxy();
 			
 		try {
 			OauthToken token = 
