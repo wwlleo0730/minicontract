@@ -6,9 +6,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
@@ -56,8 +54,8 @@ public class SMiniContractService {
 			logger.error(e.getMessage());
 		}
 		
+		logger.info("success get txHash : " +txHash);
 		contract.setEthReceipt(txHash); //保存hash
-		
 		this.sMiniContractRepository.save(contract);
 
 	}
