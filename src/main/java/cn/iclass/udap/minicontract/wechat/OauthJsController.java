@@ -23,6 +23,8 @@ import com.foxinmy.weixin4j.mp.WeixinProxy;
 import com.foxinmy.weixin4j.token.TokenManager;
 import com.foxinmy.weixin4j.type.TicketType;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @Controller
 public class OauthJsController {
 	
@@ -67,6 +69,7 @@ public class OauthJsController {
 		return ret;
 	}
 	
+	@ApiIgnore
 	public static Map<String, String> sign(String jsapi_ticket, String url) {
 		Map<String, String> ret = new HashMap<String, String>();
 		String nonce_str = create_nonce_str();
@@ -100,6 +103,8 @@ public class OauthJsController {
 		return ret;
 	}
 
+	
+	@ApiIgnore
 	private static String byteToHex(final byte[] hash) {
 		Formatter formatter = new Formatter();
 		for (byte b : hash) {
@@ -110,10 +115,12 @@ public class OauthJsController {
 		return result;
 	}
 
+	@ApiIgnore
 	private static String create_nonce_str() {
 		return UUID.randomUUID().toString();
 	}
 
+	@ApiIgnore
 	private static String create_timestamp() {
 		return Long.toString(System.currentTimeMillis() / 1000);
 	}
