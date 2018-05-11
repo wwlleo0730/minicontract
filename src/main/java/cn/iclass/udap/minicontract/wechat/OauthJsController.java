@@ -27,9 +27,6 @@ import com.foxinmy.weixin4j.type.TicketType;
 public class OauthJsController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(OauthJsController.class);
-	
-	@Resource
-	private WeixinProxy weixinProxy;
 
 	private static final String URL_PARA = "url";
 	
@@ -49,6 +46,7 @@ public class OauthJsController {
 		
 		logger.info("receive url to js oauth->"+url);
 		
+		WeixinProxy weixinProxy = new WeixinProxy();
 		
 		Map<String, String> ret = null;
 		
