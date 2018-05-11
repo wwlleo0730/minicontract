@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import com.foxinmy.weixin4j.mp.model.User;
 
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
 @RequestMapping("/oauth")
@@ -35,6 +37,7 @@ public class OauthController {
 	@Resource
 	private SAccountDao accountDao;
 	
+	@ApiIgnore
 	@ResponseBody
 	@RequestMapping(value = { "/test" })
 	public String oauthTest() {
@@ -90,12 +93,32 @@ public class OauthController {
 		return user;
 	}
 	
+	@RequestMapping(value = { "/token/dec/{tokenValue}" } )
+	public User decOauthToken(@PathVariable("tokenValue") String tokenValue){
+		
+		User user = null;
+		
+		try {
+			String userInfo = DesUtil.decryption(tokenValue);
+			JSONObject obj = JSON.parseObject(userInfo);
+
+			user = JSON.toJavaObject(obj, User.class);
+
+		} catch (Exception e) {
+			
+			return new User();
+			
+		}
+		
+		return user;
+	} 
 	
 	/**
 	 * 从回调中的code内获得用户
 	 * @param code
 	 * @return
 	 */
+	@ApiIgnore
 	public User getUserByCode(String code) {
 		
 		OauthApi oauthApi =  new OauthApi();
@@ -143,6 +166,7 @@ public class OauthController {
 	 * @param user
 	 * @param response
 	 */
+	@ApiIgnore
 	private void saveUserCookies(User user, HttpServletResponse response) {
 				
 		String p = JSON.toJSON(user).toString();
@@ -168,6 +192,7 @@ public class OauthController {
 	 * @param request
 	 * @return
 	 */
+	@ApiIgnore
 	private User checkCookie(HttpServletRequest request) {
 
 		String tokenValue = "";
