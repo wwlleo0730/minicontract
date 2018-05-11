@@ -21,11 +21,13 @@ public class WechatUserController {
 	@Resource
 	private SAccountDao accountDao;
 	
+	@Resource
+	private WeixinProxy weixinProxy;
+	
 	@GetMapping("/wechat/user/{code}")
 	public User getUserByCode(@PathVariable String code){
 
 		OauthApi oauthApi =  new OauthApi();
-		WeixinProxy weixinProxy = new WeixinProxy();
 			
 		try {
 			OauthToken token = 
