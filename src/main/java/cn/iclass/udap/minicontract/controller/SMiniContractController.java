@@ -44,18 +44,17 @@ public class SMiniContractController {
 	@GetMapping("/mysMiniContracts/{wxid}")
 	public List<SMiniContract> get(@PathVariable("wxid") String wxid) {
 		
-		return sMiniContractRepository.findAll();
+//		return sMiniContractRepository.findAll();
 		
-//		List<SMiniContract> list1 =  this.sMiniContractRepository.findByCreatorWxid(wxid);
-//		
-//		List<SMiniContract> list2 =  this.sMiniContractRepository.findByReceiverWxid(wxid);
-//		
-//		List<SMiniContract> arrayList =  new ArrayList<SMiniContract>();
-//		
-//		arrayList.addAll(list1);
-//		arrayList.addAll(list2);
-//		
-//		return arrayList;
+		List<SMiniContract> list1 =  this.sMiniContractRepository.findByCreatorWxid(wxid);
+		List<SMiniContract> list2 =  this.sMiniContractRepository.findByReceiverWxid(wxid);
+		
+		List<SMiniContract> arrayList =  new ArrayList<SMiniContract>();
+		
+		arrayList.addAll(list1);
+		arrayList.addAll(list2);
+
+		return arrayList;
 	}
 
 	@ApiOperation(value = "根据ID获得合同信息", notes = "根据ID获得合同信息", httpMethod = "GET")
