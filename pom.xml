@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.iclass</groupId>
 	<artifactId>udap-minicontract</artifactId>
@@ -63,7 +64,7 @@
 			<version>1.16.20</version>
 		</dependency>
 
-		<!--web3j-->
+		<!--web3j -->
 		<dependency>
 			<groupId>org.web3j</groupId>
 			<artifactId>web3j-spring-boot-starter</artifactId>
@@ -117,7 +118,7 @@
 			<version>${web3j.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- 微信相关 -->
 		<dependency>
 			<groupId>com.foxinmy</groupId>
@@ -129,7 +130,7 @@
 			<artifactId>weixin4j-mp</artifactId>
 			<version>1.7.9</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -145,80 +146,81 @@
 	<build>
 		<!-- 设置打包的文件名 -->
 		<finalName>${project.artifactId}</finalName>
-		
-		<!-- 必须的plugin -->
-		<plugins>
+		<pluginManagement>
+			<!-- 必须的plugin -->
+			<plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-archetype-plugin</artifactId>
-				<version>3.0.0</version>
-			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
 
-			<!-- Compiler , jdk1.8 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<showWarnings>true</showWarnings>
-					<encoding>UTF-8</encoding>
-					<compilerArguments>
-						<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
-					</compilerArguments>
-				</configuration>
-			</plugin>
-			<!-- 如果不定义，默认用最新的 -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<configuration>
-							<mainClass>${start-class}</mainClass>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>${start-class}</mainClass>
-				</configuration>
-			</plugin>
-			<!--web3j-->
-			<plugin>
-				<groupId>org.web3j</groupId>
-				<artifactId>web3j-maven-plugin</artifactId>
-				<version>0.3.0</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate-sources</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<packageName>
-						cn.iclass.udap.minicontract.smartContract
-					</packageName>
-					<sourceDestination>
-						src/main/java
-					</sourceDestination>
-					<nativeJavaType>
-						true
-					</nativeJavaType>
-					<soliditySourceFiles>
-						<directory>src/main/resources/solidity</directory>
-						<includes>
-							<include>**/*.sol</include>
-						</includes>
-					</soliditySourceFiles>
-				</configuration>
-			</plugin>
-		</plugins>
+				<!-- Compiler , jdk1.8 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<showWarnings>true</showWarnings>
+						<encoding>UTF-8</encoding>
+						<compilerArguments>
+							<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+						</compilerArguments>
+					</configuration>
+				</plugin>
+				<!-- 如果不定义，默认用最新的 -->
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+							<configuration>
+								<mainClass>${start-class}</mainClass>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>${start-class}</mainClass>
+					</configuration>
+				</plugin>
+				<!--web3j -->
+				<plugin>
+					<groupId>org.web3j</groupId>
+					<artifactId>web3j-maven-plugin</artifactId>
+					<version>0.3.0</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate-sources</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<packageName>
+							cn.iclass.udap.minicontract.smartContract
+						</packageName>
+						<sourceDestination>
+							src/main/java
+						</sourceDestination>
+						<nativeJavaType>
+							true
+						</nativeJavaType>
+						<soliditySourceFiles>
+							<directory>src/main/resources/solidity</directory>
+							<includes>
+								<include>**/*.sol</include>
+							</includes>
+						</soliditySourceFiles>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
 		<!--指定资源文件目录和java源代码目录 -->
 		<sourceDirectory>src/main/java</sourceDirectory>
