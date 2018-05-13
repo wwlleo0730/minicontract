@@ -24,6 +24,7 @@ import com.foxinmy.weixin4j.mp.model.OauthToken;
 import com.foxinmy.weixin4j.mp.model.User;
 
 import cn.iclass.udap.minicontract.core.ResultGenerator;
+import cn.iclass.udap.minicontract.core.ServiceException;
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
 import springfox.documentation.annotations.ApiIgnore;
@@ -90,16 +91,18 @@ public class OauthController {
 
 		User user = getUserByCode(code);
 
-		if (user != null) {
+		if (user != null && null != user.getNickName()) {
+			
 			this.saveUserCookies(user, response);
+			return user;
+		}else {
+			throw new ServiceException("code 异常，获得用户为空");
 		}
-
-		return user;
 	}
 	
 	@ResponseBody
 	@GetMapping(value = { "/token/dec/{tokenValue}" } )
-	public Object decOauthToken(@PathVariable("tokenValue") String tokenValue){
+	public User decOauthToken(@PathVariable("tokenValue") String tokenValue){
 		
 		User user = null;
 		
@@ -108,14 +111,13 @@ public class OauthController {
 			JSONObject obj = JSON.parseObject(userInfo);
 
 			user = JSON.toJavaObject(obj, User.class);
+			
+			return user;
 
 		} catch (Exception e) {
 			
-			return ResultGenerator.genFailResult(e.getMessage());
-			
+			throw new ServiceException("解码出错，获得用户为空");
 		}
-		
-		return user;
 	} 
 	
 	/**
