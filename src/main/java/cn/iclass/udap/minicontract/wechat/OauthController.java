@@ -174,6 +174,8 @@ public class OauthController {
 	@ApiIgnore
 	private void saveUserCookies(User user, HttpServletResponse response) {
 				
+		logger.info("save user in cookes: "+user.toString());
+		
 		String p = JSON.toJSON(user).toString();
 		
 		String token = "";
@@ -214,6 +216,8 @@ public class OauthController {
 			User user = null;
 
 			if (null != tokenValue && tokenValue.length() > 0) {
+				
+				logger.info("get tokenValue:" + tokenValue);
 
 				try {
 					String userInfo = DesUtil.decryption(tokenValue);
