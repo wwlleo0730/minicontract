@@ -23,6 +23,7 @@ import com.foxinmy.weixin4j.mp.api.OauthApi;
 import com.foxinmy.weixin4j.mp.model.OauthToken;
 import com.foxinmy.weixin4j.mp.model.User;
 
+import cn.iclass.udap.minicontract.core.ResultGenerator;
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
 import springfox.documentation.annotations.ApiIgnore;
@@ -52,6 +53,8 @@ public class OauthController {
 		User user = checkCookie(request);
 
 		if (user != null) {
+			
+			logger.info("user already in cookies" + user.toString());
 
 			String redirectUrl = OAUTH_SERVER + "/usertoken";
 
@@ -94,8 +97,9 @@ public class OauthController {
 		return user;
 	}
 	
+	@ResponseBody
 	@GetMapping(value = { "/token/dec/{tokenValue}" } )
-	public User decOauthToken(@PathVariable("tokenValue") String tokenValue){
+	public Object decOauthToken(@PathVariable("tokenValue") String tokenValue){
 		
 		User user = null;
 		
@@ -107,7 +111,7 @@ public class OauthController {
 
 		} catch (Exception e) {
 			
-			return new User();
+			return ResultGenerator.genFailResult(e.getMessage());
 			
 		}
 		
