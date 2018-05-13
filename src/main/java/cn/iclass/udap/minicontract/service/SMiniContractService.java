@@ -171,6 +171,8 @@ public class SMiniContractService {
 		
 		smini.setCreatormobile(contract.getCreatormobile());
 		smini.setReceivermobile(contract.getReceivermobile());
+		smini.setCreatorname(contract.getCreatorname());
+		smini.setReceivername(contract.getReceivername());
 		
 		smini.setCreatorsigntime(null);
 		smini.setReceiversigntime(null);
