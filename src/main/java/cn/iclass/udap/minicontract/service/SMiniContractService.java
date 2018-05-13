@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import cn.iclass.udap.minicontract.core.ServiceException;
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
 import cn.iclass.udap.minicontract.repository.Constant;
@@ -50,8 +51,10 @@ public class SMiniContractService {
 		
 		} catch (ExecutionException e) {
 			logger.error(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		} catch (InterruptedException e) {
 			logger.error(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		}
 		
 		logger.info("success get txHash : " +txHash);
