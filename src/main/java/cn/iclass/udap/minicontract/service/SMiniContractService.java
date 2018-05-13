@@ -76,7 +76,7 @@ public class SMiniContractService {
 	/**
 	 * 合同签字
 	 */
-	public SMiniContract signContract(long contractId, String wxid) {
+	public SMiniContract signContract(long contractId, String wxid) throws Exception{
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(contractId);
 		

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.iclass.udap.minicontract.core.ServiceException;
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
 import cn.iclass.udap.minicontract.domain.SMiniContractVO;
@@ -106,7 +107,13 @@ public class SMiniContractController {
 			, httpMethod = "POST")
 	@PostMapping("/sign/{id}/{wxid}")
 	public boolean signContract(@PathVariable long id , @PathVariable String wxid){
-		sminiContractService.signContract(id, wxid);
+		
+		try {
+			sminiContractService.signContract(id, wxid);
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+		
 		return true;
 	}
 	
