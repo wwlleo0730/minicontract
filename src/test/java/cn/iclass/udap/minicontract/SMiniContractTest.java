@@ -73,13 +73,23 @@ public class SMiniContractTest {
 		
 		SMiniContract contract = this.scontractDao.findOne(2L);
 		
-		this.miniService.signContract(contract.getId(), contract.getCreator().getWxid());
+		try {
+			this.miniService.signContract(contract.getId(), contract.getCreator().getWxid());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		SAccount receiver = this.accountDao.findOne(2L);
 		
 		this.miniService.bindContractAndAccount(contract.getId(), receiver.getWxid());
 		
-		this.miniService.signContract(contract.getId() , receiver.getWxid());
+		try {
+			this.miniService.signContract(contract.getId() , receiver.getWxid());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
