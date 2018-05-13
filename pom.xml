@@ -146,7 +146,6 @@
 	<build>
 		<!-- 设置打包的文件名 -->
 		<finalName>${project.artifactId}</finalName>
-		<pluginManagement>
 			<!-- 必须的plugin -->
 			<plugins>
 
@@ -220,7 +219,6 @@
 					</configuration>
 				</plugin>
 			</plugins>
-		</pluginManagement>
 
 		<!--指定资源文件目录和java源代码目录 -->
 		<sourceDirectory>src/main/java</sourceDirectory>
