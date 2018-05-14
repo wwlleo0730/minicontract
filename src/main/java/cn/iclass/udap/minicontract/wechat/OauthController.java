@@ -1,5 +1,8 @@
 package cn.iclass.udap.minicontract.wechat;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +28,7 @@ import com.foxinmy.weixin4j.mp.WeixinProxy;
 import com.foxinmy.weixin4j.mp.api.OauthApi;
 import com.foxinmy.weixin4j.mp.model.OauthToken;
 import com.foxinmy.weixin4j.mp.model.User;
+import com.foxinmy.weixin4j.util.URLEncodingUtil;
 
 import cn.iclass.udap.minicontract.core.ResultGenerator;
 import cn.iclass.udap.minicontract.core.ServiceException;
@@ -135,8 +139,10 @@ public class OauthController {
 	public String oauth(HttpServletRequest request) {
 
 		User user = checkCookie(request);
+		
+		String decodeURL = getdecodeAppurl(request);
 
-		String oauth2url = getAppurl(request); // 加密跳转url
+		String oauth2url = this.decodeURL(decodeURL);
 		
 		logger.info("redirect to "+oauth2url);
 
@@ -144,7 +150,7 @@ public class OauthController {
 			return "redirect:" + oauth2url;
 		} else {
 			OauthApi oapi = new OauthApi();
-			String redirectUrl = OAUTH_SERVER + "/toappurl?appurl=" + oauth2url;
+			String redirectUrl = OAUTH_SERVER + "/toappurl?appurl=" + decodeURL;
 			return "redirect:" + oapi.getUserAuthorizationURL(redirectUrl, "state", "snsapi_base");
 		}
 
@@ -154,7 +160,7 @@ public class OauthController {
 	public String oauth(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "code") String code) {
 
-		String oauth2url = request.getParameter(JUMP_URL_TAG);
+		String decodeURL = request.getParameter(JUMP_URL_TAG);
 
 		User user = getUserByCode(code);
 
@@ -162,10 +168,10 @@ public class OauthController {
 			this.saveUserCookies(user, response); // 写入cookies
 		}
 		
-		return "redirect:" + oauth2url;
+		return "redirect:" + this.decodeURL(decodeURL);
 	}
 	
-	private String getAppurl(HttpServletRequest request) {
+	private String getdecodeAppurl(HttpServletRequest request) {
 		String appurl = "";
 		String re = JUMP_URL_TAG + "=(.*)";
 		String str = request.getQueryString();
@@ -178,6 +184,10 @@ public class OauthController {
 		}
 		
 		return appurl;
+	}
+	
+	public String decodeURL(String deurl){
+		return URLDecoder.decode(deurl);
 	}
 	
 	/**
