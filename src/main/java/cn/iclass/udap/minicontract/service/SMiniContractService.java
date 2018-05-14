@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import cn.iclass.udap.minicontract.core.ServiceException;
 import cn.iclass.udap.minicontract.domain.SAccount;
 import cn.iclass.udap.minicontract.domain.SMiniContract;
+import cn.iclass.udap.minicontract.domain.SMiniContractVO;
 import cn.iclass.udap.minicontract.repository.Constant;
 import cn.iclass.udap.minicontract.repository.SAccountDao;
 import cn.iclass.udap.minicontract.repository.SMiniContractDao;
@@ -117,6 +118,34 @@ public class SMiniContractService {
 		
 		return smini;
 	}
+	
+	
+	/**
+	 * 创建合同
+	 * @param vo
+	 * @return
+	 */
+	public SMiniContract createContract(SMiniContractVO vo) {
+
+		SMiniContract contract = new SMiniContract();
+
+		contract.setTitle(vo.getTitle());
+		contract.setContent(vo.getContent());
+		contract.setPhotoUrl(vo.getPicUrl());
+		
+		contract.setCreatorname(vo.getCreatorname());
+		contract.setCreatormobile(vo.getCreatormobile());
+		contract.setReceivername(vo.getReceivername());
+		contract.setReceivermobile(vo.getReceivermobile());
+
+		SAccount creator = this.sAccountDao.findByWxid(vo.getWxid());
+
+		contract.setCreator(creator);
+
+		this.sMiniContractRepository.save(contract);
+
+		return contract;
+	}
 
 	/**
 	 * 创建合同
@@ -126,6 +155,7 @@ public class SMiniContractService {
 	 * @param picurl
 	 * @return
 	 */
+	@Deprecated
 	public SMiniContract createContract(String wxid, String title, String content, String picurl) {
 
 		SMiniContract contract = new SMiniContract();

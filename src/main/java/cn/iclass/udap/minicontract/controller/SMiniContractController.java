@@ -88,9 +88,7 @@ public class SMiniContractController {
 	@ApiOperation(value = "创建合同", notes = "创建合同", httpMethod = "POST")
 	@PostMapping("/sMiniContracts")
 	public SMiniContract createContract(@RequestBody SMiniContractVO contractVO){
-		
-		return this.sminiContractService.createContract(contractVO.getWxid() , contractVO.getTitle(),
-				contractVO.getContent() , contractVO.getPicUrl());
+		return this.sminiContractService.createContract(contractVO);
 	}
 	
 	@ApiOperation(value = "合同用户绑定", notes = "接收者接收到一份分享的合同时，可以快速绑定的方法，id为合同id，wxid为获得的openid"
@@ -109,6 +107,16 @@ public class SMiniContractController {
 		return sminiContractService.updateContract(id,contract);	
 	}
 	
+	@ApiOperation(value = "修改合同，并重置双方签名信息", notes = "修改合同内容方法,不会触发签名重置"
+			, httpMethod = "POST")
+	@PostMapping("/sMiniContracts/{id}")
+	public SMiniContract updateContractWithOutSign(@PathVariable long id , 
+			@RequestBody SMiniContract contract){
+		//更新合同
+		return sminiContractService.updateContract(id,contract);	
+	}
+	
+	
 	@ApiOperation(value = "签订合同方法", notes = "签订合同方法，调用方只需要传合同id和wxid，后台自动判断是谁签署"
 			, httpMethod = "POST")
 	@PostMapping("/sign/{id}/{wxid}")
@@ -122,6 +130,8 @@ public class SMiniContractController {
 		
 		return true;
 	}
+	
+	
 	
 	
 	@ApiOperation(value = "删除合同", notes = "删除合同方法", httpMethod = "POST")
