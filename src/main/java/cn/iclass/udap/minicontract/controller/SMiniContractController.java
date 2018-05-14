@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,9 @@ public class SMiniContractController {
 	private SMiniContractDao sMiniContractRepository;
 	
 	@Resource
+	private SAccountDao saccountDao;
+	
+	@Resource
 	private SMiniContractService sminiContractService;
 
 //	@ApiOperation(value = "所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
@@ -43,20 +47,22 @@ public class SMiniContractController {
 	
 	@ApiOperation(value = "我的所有合同", notes = "获得所有合同方法，暂时不分页", httpMethod = "GET")
 	@GetMapping("/mysMiniContracts/{wxid}")
-	public List<SMiniContract> get(@PathVariable("wxid") String wxid) {
+	public List<SMiniContract> get(@PathVariable("wxid") String wxid , HttpServletRequest request) {
 		
-//		return sMiniContractRepository.findAll();
+		String keyword = request.getParameter("keyword");
 		
-		List<SMiniContract> list1 =  this.sMiniContractRepository.findByCreatorWxid(wxid);
-		List<SMiniContract> list2 =  this.sMiniContractRepository.findByReceiverWxid(wxid);
+		SAccount s = saccountDao.findByWxid(wxid);
 		
-		List<SMiniContract> arrayList =  new ArrayList<SMiniContract>();
-		
-		arrayList.addAll(list1);
-		arrayList.addAll(list2);
-
-		return arrayList;
+		if(null == keyword){
+			
+			return sMiniContractRepository.findByCreatorIdOrReceiverId(s.getId());
+			
+		}else{
+			
+			return sMiniContractRepository.findByCreatorIdOrReceiverIdAndKeyWord(s.getId(), "%"+keyword+"%");	
+		}
 	}
+	
 
 	@ApiOperation(value = "根据ID获得合同信息", notes = "根据ID获得合同信息", httpMethod = "GET")
 	@GetMapping("/sMiniContracts/{id}")

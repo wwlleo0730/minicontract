@@ -1,5 +1,7 @@
 package cn.iclass.udap.minicontract;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
@@ -64,6 +66,16 @@ public class SMiniContractTest {
 		contract.setPhotoUrl("http://localhost/ppp.jpg");
 		
 		this.scontractDao.save(contract);
+		
+	}
+	
+	@Test
+	public void findbyWxid(){
+		
+		List list = 
+				scontractDao.findByCreatorIdOrReceiverIdAndKeyWord(5,"%"+"123"+"%");
+		
+		System.out.println(list.size());
 		
 	}
 	

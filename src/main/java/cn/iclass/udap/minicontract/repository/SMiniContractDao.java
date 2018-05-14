@@ -19,7 +19,12 @@ public interface SMiniContractDao extends JpaRepository<SMiniContract, Long>{
 	
 	List<SMiniContract> findByCreatorWxid(String wxid);
 	
-	@Query("from SMiniContract t where t.creator.wxid = ?1 or t.receiver.wxid = ?1")
-	List<SMiniContract> findByCreatorWxidOrReceiverWxid(String wxid);
+	@Query("from SMiniContract t where (t.creator.id = ?1  or t.receiver.id = ?1)"
+			+ " order by t.createTime desc")
+	List<SMiniContract> findByCreatorIdOrReceiverId(long id);
+	
+	@Query("from SMiniContract t where (t.creator.id = ?1  or t.receiver.id = ?1) and t.title like ?2"
+			+ " order by t.createTime desc")
+	List<SMiniContract> findByCreatorIdOrReceiverIdAndKeyWord(long id , String keyword);
 
 }
