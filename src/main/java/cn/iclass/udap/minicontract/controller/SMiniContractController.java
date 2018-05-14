@@ -107,16 +107,6 @@ public class SMiniContractController {
 		return sminiContractService.updateContract(id,contract);	
 	}
 	
-	@ApiOperation(value = "修改合同，并重置双方签名信息", notes = "修改合同内容方法,不会触发签名重置"
-			, httpMethod = "POST")
-	@PostMapping("/sMiniContracts/{id}")
-	public SMiniContract updateContractWithOutSign(@PathVariable long id , 
-			@RequestBody SMiniContract contract){
-		//更新合同
-		return sminiContractService.updateContract(id,contract);	
-	}
-	
-	
 	@ApiOperation(value = "签订合同方法", notes = "签订合同方法，调用方只需要传合同id和wxid，后台自动判断是谁签署"
 			, httpMethod = "POST")
 	@PostMapping("/sign/{id}/{wxid}")
