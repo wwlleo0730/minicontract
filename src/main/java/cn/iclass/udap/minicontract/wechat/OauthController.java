@@ -250,7 +250,7 @@ public class OauthController {
 		
 		String p = JSON.toJSON(user).toString();
 		
-		String token = p;
+		String token = URLEncoder.encode(p);
 		
 //		try {
 //			token = DesUtil.encryption(p);
