@@ -1,5 +1,8 @@
 package cn.iclass.udap.minicontract.wechat;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +39,8 @@ public class OauthController {
 	private Logger logger = LoggerFactory.getLogger(OauthController.class);
 	
 	private static final String OAUTH_SERVER = "https://sooc.iclass.cn/miniapi/oauth";
+	
+	private static final String JUMP_URL_TAG = "appurl";
 	
 	@Resource
 	private SAccountDao accountDao;
@@ -118,7 +123,62 @@ public class OauthController {
 			
 			throw new ServiceException("解码出错，获得用户为空");
 		}
-	} 
+	}
+	
+	/**
+	 * 动态URL认证方式,直接传入url,不加密
+	 * 
+	 * @param system
+	 * @return
+	 */
+	@GetMapping(value = { "/oauth2url" })
+	public String oauth(HttpServletRequest request) {
+
+		User user = checkCookie(request);
+
+		String oauth2url = getAppurl(request); // 加密跳转url
+		
+		logger.info("redirect to "+oauth2url);
+
+		if (user != null) {
+			return "redirect:" + oauth2url;
+		} else {
+			OauthApi oapi = new OauthApi();
+			String redirectUrl = OAUTH_SERVER + "/toappurl?appurl=" + oauth2url;
+			return "redirect:" + oapi.getUserAuthorizationURL(redirectUrl, "state", "snsapi_base");
+		}
+
+	}
+
+	@RequestMapping(value = "/toappurl")
+	public String oauth(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "code") String code) {
+
+		String oauth2url = request.getParameter(JUMP_URL_TAG);
+
+		User user = getUserByCode(code);
+
+		if (user != null) {
+			this.saveUserCookies(user, response); // 写入cookies
+		}
+		
+		return "redirect:" + oauth2url;
+	}
+	
+	private String getAppurl(HttpServletRequest request) {
+		String appurl = "";
+		String re = JUMP_URL_TAG + "=(.*)";
+		String str = request.getQueryString();
+
+		Pattern p = Pattern.compile(re);
+		Matcher m = p.matcher(str);
+
+		while (m.find()) {
+			appurl = m.group(1);
+		}
+		
+		return appurl;
+	}
 	
 	/**
 	 * 从回调中的code内获得用户
@@ -126,7 +186,7 @@ public class OauthController {
 	 * @return
 	 */
 	@ApiIgnore
-	public User getUserByCode(String code) {
+	private User getUserByCode(String code) {
 		
 		OauthApi oauthApi =  new OauthApi();
 		
