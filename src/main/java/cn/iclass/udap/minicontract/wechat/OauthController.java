@@ -250,13 +250,13 @@ public class OauthController {
 		
 		String p = JSON.toJSON(user).toString();
 		
-		String token = "";
+		String token = p;
 		
-		try {
-			token = DesUtil.encryption(p);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
+//		try {
+//			token = DesUtil.encryption(p);
+//		} catch (Exception e) {
+//			logger.error(e.getMessage());
+//		}
 		
 		Cookie cookie = new Cookie("wechat-token", token);
 		cookie.setMaxAge(172800); // 保存两天
