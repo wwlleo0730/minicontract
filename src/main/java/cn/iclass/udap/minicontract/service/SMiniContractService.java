@@ -188,40 +188,43 @@ public class SMiniContractService {
 		
 		boolean reSign = false;
 		
-		if(!smini.getTitle().equals(contract.getTitle())){
+		if(null != contract.getTitle() && !contract.getTitle().equals(smini.getTitle())){
 			smini.setTitle(contract.getTitle());
 			reSign = true;
 		}
-		
-		if(!smini.getContent().equals(contract.getContent())){
+				
+		if( null != contract.getContent() &&  !contract.getContent().equals(smini.getContent())){
 			smini.setContent(contract.getContent());
 			reSign = true;
 		}
 		
-		if(!smini.getCreatormobile().equals(contract.getCreatormobile())){
+		if( null != contract.getCreatormobile() && !contract.getCreatormobile().equals(smini.getCreatormobile())){
 			smini.setCreatormobile(contract.getCreatormobile());
 			reSign = true;
 		}
 		
-		if(!smini.getCreatorname().equals(contract.getCreatorname())){
+		if( null != contract.getCreatorname() && !contract.getCreatorname().equals(smini.getCreatorname())){
+			
 			smini.setCreatorname(contract.getCreatorname());
 			reSign = true;
 		}
 		
-		if(!smini.getReceivermobile().equals(contract.getReceivermobile())){
+		if( null != contract.getReceivermobile() && !contract.getReceivermobile().equals(smini.getReceivermobile())){
 			smini.setReceivermobile(contract.getReceivermobile());
 			reSign = true;
 		}
 		
-		if(!smini.getReceivername().equals(contract.getReceivername())){
+		if( null != contract.getReceivername() && !contract.getReceivername().equals(smini.getReceivername())){
 			smini.setReceivername(contract.getReceivername());
 			reSign = true;
 		}
 		
-		if(!smini.getPhotoUrl().equals(contract.getPhotoUrl())){
+		
+		if( null != contract.getPhotoUrl() && ! contract.getPhotoUrl().equals(smini.getPhotoUrl())){
 			smini.setPhotoUrl(contract.getPhotoUrl());
 			reSign = true;
 		}
+		
 		
 		if(reSign){
 			
