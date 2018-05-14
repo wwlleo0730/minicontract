@@ -156,7 +156,7 @@ public class OauthController {
 
 	}
 
-	@RequestMapping(value = "/toappurl")
+	@GetMapping(value = "/toappurl")
 	public String oauth(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "code") String code) {
 
