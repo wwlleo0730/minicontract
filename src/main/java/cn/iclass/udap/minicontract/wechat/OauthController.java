@@ -292,8 +292,10 @@ public class OauthController {
 				logger.info("get tokenValue:" + tokenValue);
 
 				try {
-					String userInfo = DesUtil.decryption(tokenValue);
+					String userInfo =  URLDecoder.decode(tokenValue);
+					
 					JSONObject obj = JSON.parseObject(userInfo);
+					
 					user = JSON.toJavaObject(obj, User.class);
 				} catch (Exception e) {
 					logger.error(e.getMessage());
