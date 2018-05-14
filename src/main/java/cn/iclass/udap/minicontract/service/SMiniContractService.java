@@ -186,31 +186,51 @@ public class SMiniContractService {
 
 		SMiniContract smini = this.sMiniContractRepository.findOne(id);
 		
-//		if(null != contract.getCreator()){
-//			
-//			smini.setCreator(contract.getCreator());
-//			
-//		}
-//		
-//		if(null != contract.getReceiver()){
-//			
-//			smini.setReceiver(contract.getReceiver());
-//			
-//		}
+		boolean reSign = false;
+		
+		if(!smini.getTitle().equals(contract.getTitle())){
+			smini.setTitle(contract.getTitle());
+			reSign = true;
+		}
+		
+		if(!smini.getContent().equals(contract.getContent())){
+			smini.setContent(contract.getContent());
+			reSign = true;
+		}
+		
+		if(!smini.getCreatormobile().equals(contract.getCreatormobile())){
+			smini.setCreatormobile(contract.getCreatormobile());
+			reSign = true;
+		}
+		
+		if(!smini.getCreatorname().equals(contract.getCreatorname())){
+			smini.setCreatorname(contract.getCreatorname());
+			reSign = true;
+		}
+		
+		if(!smini.getReceivermobile().equals(contract.getReceivermobile())){
+			smini.setReceivermobile(contract.getReceivermobile());
+			reSign = true;
+		}
+		
+		if(!smini.getReceivername().equals(contract.getReceivername())){
+			smini.setReceivername(contract.getReceivername());
+			reSign = true;
+		}
+		
+		if(!smini.getPhotoUrl().equals(contract.getPhotoUrl())){
+			smini.setPhotoUrl(contract.getPhotoUrl());
+			reSign = true;
+		}
+		
+		if(reSign){
+			
+			smini.setCreatorsigntime(null);
+			smini.setReceiversigntime(null);
+			smini.setIscreatorsign(false);
+			smini.setIsreceiversign(false);	
+		}
 
-		smini.setTitle(contract.getTitle());
-		smini.setContent(contract.getContent());
-		smini.setPhotoUrl(contract.getPhotoUrl());
-		
-		smini.setCreatormobile(contract.getCreatormobile());
-		smini.setReceivermobile(contract.getReceivermobile());
-		smini.setCreatorname(contract.getCreatorname());
-		smini.setReceivername(contract.getReceivername());
-		
-		smini.setCreatorsigntime(null);
-		smini.setReceiversigntime(null);
-		smini.setIscreatorsign(false);
-		smini.setIsreceiversign(false);
 
 		smini.setLastModifyTime(System.currentTimeMillis());
 
