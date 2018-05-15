@@ -53,6 +53,11 @@ public class SMiniContractController {
 		
 		SAccount s = saccountDao.findByWxid(wxid);
 		
+		if(null == s){
+			
+			throw new ServiceException("该用户不存在");
+		}
+		
 		if(null == keyword){
 			
 			return sMiniContractRepository.findByCreatorIdOrReceiverId(s.getId());
@@ -67,7 +72,14 @@ public class SMiniContractController {
 	@ApiOperation(value = "根据ID获得合同信息", notes = "根据ID获得合同信息", httpMethod = "GET")
 	@GetMapping("/sMiniContracts/{id}")
 	public SMiniContract getOne(@PathVariable("id") long id) {
-		return this.sMiniContractRepository.findOne(id);
+		
+		SMiniContract s =  this.sMiniContractRepository.findOne(id);
+		
+		if(null == s){
+			throw new ServiceException("该合同已不存在");
+		}
+		
+		return s;
 	}
 	
 	@ApiOperation(value = "作为发起方，获得合同列表", notes = "作为发起方，获得合同列表", httpMethod = "GET")

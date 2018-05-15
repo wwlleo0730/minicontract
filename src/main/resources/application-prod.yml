@@ -1,2 +1,6 @@
 logging:
   path: /tmp/logs/udap-minicontract
+
+spring: 
+  datasource: 
+    url: jdbc:mysql://10.80.230.53:3306/contract?characterEncoding=utf8&useSSL=false
